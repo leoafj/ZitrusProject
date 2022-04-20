@@ -1,15 +1,19 @@
 package com.zitrus.backendproject.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.zitrus.backendproject.dto.ProdutoDTO;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 public class Produto implements Serializable {
 
     @Id
@@ -23,28 +27,10 @@ public class Produto implements Serializable {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    public Produto() {
-
-    }
-
-    public Produto(Long codigo, String descricao, Double valorFornecedor, int quantidadeEstoque, Categoria categoria) {
-        this.codigo = codigo;
-        this.descricao = descricao;
-        this.valorFornecedor = valorFornecedor;
-        this.quantidadeEstoque = quantidadeEstoque;
-        this.categoria = categoria;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Produto)) return false;
-        Produto produto = (Produto) o;
-        return Objects.equals(codigo, produto.codigo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(codigo);
+    public Produto(ProdutoDTO produtoDTO) {
+        this.codigo = produtoDTO.getCodigo();
+        this.descricao = produtoDTO.getDescricao();
+        this.valorFornecedor = produtoDTO.getValorFornecedor();
+        this.quantidadeEstoque = produtoDTO.getQuantidadeEstoque();
     }
 }

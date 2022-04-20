@@ -1,7 +1,9 @@
 package com.zitrus.backendproject.controller;
 
-import com.zitrus.backendproject.dto.ProdutoDTO;
+import com.zitrus.backendproject.dto.MovimentoEstoqueDTO;
+import com.zitrus.backendproject.model.MovimentoEstoque;
 import com.zitrus.backendproject.model.Produto;
+import com.zitrus.backendproject.repository.MovimentoEstoqueRepository;
 import com.zitrus.backendproject.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,21 +16,21 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/produtos")
-public class ProdutoController {
+@RequestMapping(value = "/movimento")
+public class MovimentoEstoqueController {
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private MovimentoEstoqueRepository movimentoEstoqueRepository;
 
     @GetMapping
-    public ResponseEntity<List<Produto>> findAll() {
-        List<Produto> list = produtoRepository.findAll();
+    public ResponseEntity<List<MovimentoEstoque>> findAll() {
+        List<MovimentoEstoque> list = movimentoEstoqueRepository.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Produto> findById(@PathVariable Long id) {
-        Produto prod = produtoRepository.findById(id).get();
+    public ResponseEntity<MovimentoEstoque> findById(@PathVariable Long id) {
+        MovimentoEstoque prod = movimentoEstoqueRepository.findById(id).get();
         return ResponseEntity.ok().body(prod);
     }
 }

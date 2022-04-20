@@ -1,5 +1,6 @@
 package com.zitrus.backendproject.controller;
 
+import com.zitrus.backendproject.dto.CategoriaDTO;
 import com.zitrus.backendproject.model.Categoria;
 import com.zitrus.backendproject.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/categorias")
