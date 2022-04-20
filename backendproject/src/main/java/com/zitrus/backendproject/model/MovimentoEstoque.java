@@ -1,4 +1,4 @@
-package com.zitrus.backendproject.entities;
+package com.zitrus.backendproject.model;
 
 import lombok.*;
 

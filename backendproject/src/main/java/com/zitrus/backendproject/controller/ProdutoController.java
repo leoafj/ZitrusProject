@@ -1,7 +1,7 @@
-package com.zitrus.backendproject.resources;
+package com.zitrus.backendproject.controller;
 
-import com.zitrus.backendproject.entities.Categoria;
-import com.zitrus.backendproject.repositories.CategoriaRepository;
+import com.zitrus.backendproject.model.Produto;
+import com.zitrus.backendproject.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,20 +13,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/produtos")
-public class CategoriaResources {
+public class ProdutoController {
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private ProdutoRepository produtoRepository;
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> findAll() {
-        List<Categoria> list = categoriaRepository.findAll();
+    public ResponseEntity<List<Produto>> findAll() {
+        List<Produto> list = produtoRepository.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Categoria> findById(@PathVariable Long id) {
-        Categoria prod = categoriaRepository.findById(id);
+    public ResponseEntity<Produto> findById(@PathVariable Long id) {
+        Produto prod = produtoRepository.findById(id).get();
         return ResponseEntity.ok().body(prod);
     }
 }

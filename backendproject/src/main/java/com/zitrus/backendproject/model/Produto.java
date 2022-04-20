@@ -1,28 +1,26 @@
-package com.zitrus.backendproject.entities;
+package com.zitrus.backendproject.model;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@Entity
 public class Produto implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
-
-    @EqualsAndHashCode.Exclude
     private String descricao;
-
-    @EqualsAndHashCode.Exclude
     private Double valorFornecedor;
-
-    @EqualsAndHashCode.Exclude
     private int quantidadeEstoque;
 
-    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Produto() {
@@ -35,5 +33,18 @@ public class Produto implements Serializable {
         this.valorFornecedor = valorFornecedor;
         this.quantidadeEstoque = quantidadeEstoque;
         this.categoria = categoria;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Produto)) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(codigo, produto.codigo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo);
     }
 }
