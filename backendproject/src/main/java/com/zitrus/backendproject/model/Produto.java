@@ -1,11 +1,11 @@
 package com.zitrus.backendproject.model;
 
-import com.zitrus.backendproject.dto.ProdutoDTO;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import java.io.Serializable;
-import java.util.Objects;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -14,23 +14,27 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@Table(name = "table_produto")
 public class Produto implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column(nullable = false)
+    private String tipoProduto;
+
+    @Column(nullable = false)
     private String descricao;
-    private Double valorFornecedor;
+
+    @Column(nullable = false)
+    private Double valorCusto;
+
+    @Column(nullable = false, length = 3)
     private int quantidadeEstoque;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
+    @Column(nullable = false)
+    private LocalDateTime dataRegistro;
 
-    public Produto(ProdutoDTO produtoDTO) {
-        this.codigo = produtoDTO.getCodigo();
-        this.descricao = produtoDTO.getDescricao();
-        this.valorFornecedor = produtoDTO.getValorFornecedor();
-        this.quantidadeEstoque = produtoDTO.getQuantidadeEstoque();
-    }
+
 }
