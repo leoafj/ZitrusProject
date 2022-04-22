@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.UUID;
 
@@ -30,7 +28,7 @@ public class SaidaProduto {
     private double valorlUnitarioProduto;
 
     @Column
-    private double vlTotalVenda;
+    private double valorTotalVenda;
 
     @Column
     private String tipoMovimentacao;
