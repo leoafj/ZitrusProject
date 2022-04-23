@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.UUID;
 
@@ -27,11 +29,7 @@ public class SaidaProduto {
     @DecimalMin(value = "00.01", message = "Valor de custo deve ser maior que 0")
     private double valorlUnitarioProduto;
 
-<<<<<<< HEAD
     @JsonIgnore
-=======
-    @Column
->>>>>>> 754d460013f1c3ee2670de8959dbfb8d272bdcd6
     private double valorTotalVenda;
 
     @JsonIgnore
