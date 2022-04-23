@@ -5,7 +5,6 @@ import com.zitrus.backendproject.model.SaidaProduto;
 import com.zitrus.backendproject.repository.ProdutoRepository;
 import com.zitrus.backendproject.repository.SaidaProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -20,28 +19,26 @@ public class SaidaProdutoService {
     @Autowired
     private SaidaProdutoRepository saidaProdutoRepository;
 
-    public ResponseEntity<String> saidaProduto(UUID id, SaidaProduto saidaProduto) {
+
+    public String saidaProduto(UUID id, SaidaProduto saidaProduto) {
+
         Produto produto = produtoRepository.findById(id).get();
 
         if (saidaProduto.getQuantidadeSaida() > produto.getQuantidadeEstoque()) {
-            return ResponseEntity.ok("Quantidade do produto em estoque é menor que a quantidade solicitada para saida.");
+            return "Quantidade do produto em estoque é menor que a quantidade solicitada para saida.";
         } else if (produto.getValorCusto() > saidaProduto.getValorlUnitarioProduto()) {
-                return ResponseEntity.ok("O valor de venda deve ser maior que o de custo.");
-            }
-
-            produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - saidaProduto.getQuantidadeSaida());
-
-            saidaProduto.setValorTotalVenda(saidaProduto.getQuantidadeSaida() * saidaProduto.getValorlUnitarioProduto());
-            saidaProduto.setDataMovimentacao(new Date());
-            saidaProduto.setTipoMovimentacao("SAIDA");
-            saidaProduto.setProduto(produto);
-
-            saidaProdutoRepository.save(saidaProduto);
-            produtoRepository.save(produto);
-
-            return ResponseEntity.ok("Produto: (" + produto.getDescricao() + "), " +
-                    "quantidade de saida(" + saidaProduto.getQuantidadeSaida() + ") " +
-                    "realizada com sucesso!!");
+            return "O valor de venda deve ser maior que o de custo.";
         }
+        produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - saidaProduto.getQuantidadeSaida());
 
+        saidaProduto.setValorTotalVenda(saidaProduto.getQuantidadeSaida() * saidaProduto.getValorlUnitarioProduto());
+        saidaProduto.setDataMovimentacao(new Date());
+        saidaProduto.setTipoMovimentacao("SAIDA");
+        saidaProduto.setProduto(produto);
+
+        saidaProdutoRepository.save(saidaProduto);
+        produtoRepository.save(produto);
+
+        return "Saída realizada com sucesso!";
+    }
 }

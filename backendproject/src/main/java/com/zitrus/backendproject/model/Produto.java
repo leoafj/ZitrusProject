@@ -1,10 +1,12 @@
 package com.zitrus.backendproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
-import java.io.Serializable;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -15,25 +17,26 @@ import java.util.UUID;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "table_produto")
-public class Produto implements Serializable {
+public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Campo não informado")
     private String tipoProduto;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Campo não informado")
     private String descricao;
 
-    @Column(nullable = false)
+    @DecimalMin(value = "00.01", message = "Valor de custo deve ser maior que 0")
     private Double valorCusto;
 
-    @Column(nullable = false, length = 3)
+    @Min(value = 1, message = "A quantidade de estoque deve ser maior que 0")
     private int quantidadeEstoque;
 
-    @Column(nullable = false)
+    @JsonIgnore
     private LocalDateTime dataRegistro;
 
 

@@ -19,7 +19,8 @@ public class EntradaProdutoService {
     @Autowired
     private EntradaProdutoRepository entradaProdutoRepository;
 
-    public Produto entradaProduto(UUID id, EntradaProduto entradaProduto) {
+    public String entradaProduto(UUID id, EntradaProduto entradaProduto) {
+
         Produto produto = produtoRepository.findById(id).get();
 
         produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() + entradaProduto.getQuantidadeEntrada());
@@ -29,7 +30,9 @@ public class EntradaProdutoService {
         entradaProduto.setTipoMovimentacao("ENTRADA");
 
         entradaProdutoRepository.save(entradaProduto);
-        return produtoRepository.save(produto);
+        produtoRepository.save(produto);
+
+        return "Entrada Realizada com sucesso!";
     }
 
 }

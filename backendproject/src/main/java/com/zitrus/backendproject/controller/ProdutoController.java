@@ -1,9 +1,7 @@
 package com.zitrus.backendproject.controller;
 
 import com.zitrus.backendproject.model.Produto;
-import com.zitrus.backendproject.model.dto.ProdutoDTO;
 import com.zitrus.backendproject.service.ProdutoService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,9 +27,7 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus
-    public ResponseEntity<Object> save(@RequestBody ProdutoDTO produtoDTO){
-        var produto = new Produto();
-        BeanUtils.copyProperties(produtoDTO, produto);
+    public ResponseEntity<Object> save(@RequestBody Produto produto){
         produto.setDataRegistro(LocalDateTime.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.save(produto));
     }
@@ -61,13 +57,12 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> update(@PathVariable(value = "id") UUID id, @RequestBody @Valid ProdutoDTO produtoDTO){
+    public ResponseEntity<Object> update(@PathVariable(value = "id") UUID id, @RequestBody @Valid Produto produto){
         Optional<Produto> produtoOptional = produtoService.findById(id);
         if (!produtoOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado.");
         }
-        var produto = new Produto();
-        BeanUtils.copyProperties(produtoDTO, produto);
+
         produto.setId(produtoOptional.get().getId());
         produto.setDataRegistro(produtoOptional.get().getDataRegistro());
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.save(produto));

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,20 +19,20 @@ import java.util.UUID;
 public class SaidaProduto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column
+    @Min(value = 1, message = "A quantidade de saida deve ser maior que 0")
     private int quantidadeSaida;
 
-    @Column
+    @DecimalMin(value = "00.01", message = "Valor de custo deve ser maior que 0")
     private double valorlUnitarioProduto;
 
-    @Column
+    @JsonIgnore
     private double valorTotalVenda;
 
-    @Column
+    @JsonIgnore
     private String tipoMovimentacao;
 
     @JsonIgnore

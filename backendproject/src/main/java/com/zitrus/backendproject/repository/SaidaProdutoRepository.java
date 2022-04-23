@@ -11,7 +11,9 @@ import java.util.UUID;
 @Repository
 public interface SaidaProdutoRepository extends JpaRepository<SaidaProduto, UUID> {
 
-    List<SaidaProduto> ProcurarSaidaProdutosPorProduto(Produto produto);
+    List<SaidaProduto> findSaidaProdutosByProduto_TipoProduto(String tipoProduto);
 
-    List<SaidaProduto> ProcurarSaidaProdutosPorProduto_TipoProduto(String tipoProduto);
+    List<SaidaProduto> findSaidaProdutosByProduto(Produto produto);
+
+
 }
