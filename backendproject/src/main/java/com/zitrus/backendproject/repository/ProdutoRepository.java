@@ -11,7 +11,13 @@ import java.util.UUID;
 public interface ProdutoRepository extends JpaRepository<Produto, UUID> {
 
 
+<<<<<<< HEAD
     List<Produto> findProdutosByTipoProduto(String tipoProduto);
 
 
+=======
+    List<Produto> findProdutosPorTipoProduto(String tipoProduto);
+
+    List<Produto> ProcurarProdutosPorTipoProduto(String tipoProduto);
+>>>>>>> 754d460013f1c3ee2670de8959dbfb8d272bdcd6
 }
