@@ -16,10 +16,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "table_saidaproduto")
-public class SaidaProduto {
+public class SaidaProduto{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private UUID id;
 
@@ -30,17 +30,17 @@ public class SaidaProduto {
     private double valorlUnitarioProduto;
 
     @JsonIgnore
-    private double valorTotalVenda;
-
-    @JsonIgnore
-    private String tipoMovimentacao;
-
-    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "idProduto", referencedColumnName = "id")
     private Produto produto;
 
     @JsonIgnore
+    private double valorTotalVenda;
+
+    @JsonIgnore
     @Temporal(TemporalType.DATE)
     private Date dataMovimentacao;
+
+    @JsonIgnore
+    private String tipoMovimentacao;
 }

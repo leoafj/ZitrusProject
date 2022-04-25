@@ -32,7 +32,7 @@ public class EntradaProdutoService {
         entradaProdutoRepository.save(entradaProduto);
         produtoRepository.save(produto);
 
-        return "Entrada Realizada com sucesso!";
+        return "Entrada do produto realizada com sucesso!";
     }
 
 }
