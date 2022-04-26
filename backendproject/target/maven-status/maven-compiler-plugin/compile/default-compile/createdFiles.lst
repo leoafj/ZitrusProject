@@ -1,0 +1,17 @@
+com\zitrus\backendproject\repository\EntradaProdutoRepository.class
+com\zitrus\backendproject\repository\UsuarioRepository.class
+com\zitrus\backendproject\controller\SaidaProdutoController.class
+com\zitrus\backendproject\controller\EntradaProdutoController.class
+com\zitrus\backendproject\service\SaidaProdutoService.class
+com\zitrus\backendproject\repository\SaidaProdutoRepository.class
+com\zitrus\backendproject\controller\MovimentoProdutoController.class
+com\zitrus\backendproject\service\EntradaProdutoService.class
+com\zitrus\backendproject\model\SaidaProduto.class
+com\zitrus\backendproject\BackendprojectApplication.class
+com\zitrus\backendproject\controller\ProdutoController.class
+com\zitrus\backendproject\model\EntradaProduto.class
+com\zitrus\backendproject\model\Usuario.class
+com\zitrus\backendproject\service\ProdutoService.class
+com\zitrus\backendproject\repository\ProdutoRepository.class
+com\zitrus\backendproject\service\MovimentoProdutoService.class
+com\zitrus\backendproject\model\Produto.class
